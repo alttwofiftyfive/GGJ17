@@ -2,7 +2,7 @@
 <object>
   <spriteName>spr_enemy</spriteName>
   <solid>0</solid>
-  <visible>-1</visible>
+  <visible>0</visible>
   <depth>1</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
@@ -32,9 +32,51 @@ patrolpath = noone //This is the path for patroling, set it in the creation code
 currentmark = noone;
 lastpulse = noone;
 
-hunt = false
+hunt = 0 //0 is normal-stationary or patrolling
+        // 1 is moving to last pulse location
+        // 2 is wandering around to find player
+        // 3 is moving back to origin
 
 start = false //This is to run a script on the first frame only
+
+movespeed = 3
+aggression = 0.85
+
+startx = x
+starty = y
+
+xright = 0
+xleft = 0
+ytop = 0
+ybottom = 0
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Stop wandering
+hunt = 3
+if (mp_grid_path(global.grid,mypath,x,y,startx,starty,true)) //global.grid is from player create event
+    { //Dont move if a new path was not created
+    path_start(mypath,movespeed,path_action_stop,true)
+    }
 </string>
           </argument>
         </arguments>
@@ -90,7 +132,7 @@ if start == false
     {
     if path_exists(patrolpath)
         {
-        path_start(patrolpath,3,path_action_restart,true)
+        path_start(patrolpath,movespeed*aggression,path_action_restart,true)
         }
     
     start = true
@@ -123,6 +165,8 @@ if position_meeting(x,y,obj_pulse) //If pulse hits you
     newpulse = collision_circle(x,y,32,obj_pulse,true,false)
     if newpulse != lastpulse //If this is a new pulse
         {
+        aggression += 0.15
+        
         lastpulse = newpulse
         if instance_exists(currentmark)
             {
@@ -137,7 +181,8 @@ if position_meeting(x,y,obj_pulse) //If pulse hits you
         //Move to the player's location
         if (mp_grid_path(global.grid,mypath,x,y,(obj_playermarker).x,(obj_playermarker).y,true)) //global.grid is from player create event
             { //Dont move if a new path was not created
-            path_start(mypath,3,path_action_stop,true)
+            path_start(mypath,movespeed*aggression,path_action_stop,true)
+            hunt = 1
             }
         }
     }
@@ -145,8 +190,6 @@ if position_meeting(x,y,obj_pulse) //If pulse hits you
           </argument>
         </arguments>
       </action>
-    </event>
-    <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -163,8 +206,69 @@ if position_meeting(x,y,obj_pulse) //If pulse hits you
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Dont draw yourself
-//draw_self()
+            <string>///Hunting for player
+if hunt == 1
+    {
+    if path_position == 1
+        {
+        //If you reached the location of the last pulse
+        hunt = 2
+        alarm[0] = 180
+        }
+    }
+else if hunt == 2
+    { //You leave this when alarm 0 triggers
+    if path_position == 1 //If you reached the end of your path, make a new one
+        {
+        if xright == 0
+            { //This sets the farthest the enemy will wander
+            xright = x+350 * ((1-aggression)*.75 + 1)
+            xleft = x-350 * ((1-aggression)*.75 + 1)
+            ytop = y-350 * ((1-aggression)*.75 + 1)
+            ybottom = y+350 * ((1-aggression)*.75 + 1)
+            }
+        
+        //Pick a random location within a range to move to
+        do 
+            {
+            var randx = x + irandom_range(-250,250)
+            var randy = y + irandom_range(-250,250)
+            }
+        until(xleft &lt; randx &amp;&amp; randx &lt; xright &amp;&amp; ytop &lt; randy &amp;&amp; randy &lt; ybottom)
+        
+        if (mp_grid_path(global.grid,mypath,x,y,randx,randy,true)) //global.grid is from player create event
+            { //Dont move if a new path was not created 
+            if path_get_length(mypath) &lt; 250
+                {
+                path_start(mypath,movespeed*aggression,path_action_stop,true)
+                }
+            }
+        }
+    }
+else if hunt == 3
+    {
+    if path_position == 1
+        {
+        //You are back at your origin
+        hunt = 0
+        
+        xright = 0
+        xleft = 0
+        ytop = 0
+        ybottom = 0
+        
+        if path_exists(patrolpath)
+            {
+            path_start(patrolpath,movespeed*aggression,path_action_restart,true)
+            }
+        }
+    }
+
+if (hunt == 0 || hunt == 3)
+    {
+    if aggression &gt;= 1.0025
+    aggression -= 0.0025
+    }
 </string>
           </argument>
         </arguments>
