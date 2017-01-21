@@ -7,13 +7,14 @@
   <sounds name="sound"/>
   <sprites name="sprites">
     <sprite>sprites\spr_player</sprite>
+    <sprite>sprites\spr_playermarker</sprite>
     <sprite>sprites\spr_enemy</sprite>
     <sprite>sprites\spr_greyenemy</sprite>
     <sprite>sprites\spr_wall</sprite>
     <sprite>sprites\spr_indicator</sprite>
     <sprite>sprites\spr_pulse</sprite>
-    <sprite>sprites\spr_playermarker</sprite>
     <sprite>sprites\spr_wallindicator</sprite>
+    <sprite>sprites\spr_glowmark</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths">
