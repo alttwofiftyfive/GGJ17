@@ -53,13 +53,20 @@ mp_grid_add_instances(global.grid,obj_wall,false) //Mark cells cintaing wall as 
             <string>///Movement
 
 //Check for collision where you will be moving
-if !instance_place(x + 3*(keyboard_check(ord('D')) - keyboard_check(ord('A'))),y + 3*(keyboard_check(ord('S')) - keyboard_check(ord('W'))),obj_wall)
+
+//check in x
+if !instance_place(x + 3*(keyboard_check(ord('D')) - keyboard_check(ord('A'))),y,obj_wall)
     {
     //If you will not be running into a wall, then move
     x += 3*(keyboard_check(ord('D')) - keyboard_check(ord('A')))
-    y += 3*(keyboard_check(ord('S')) - keyboard_check(ord('W')))
     }
 
+//check in y
+if !instance_place(x,y + 3*(keyboard_check(ord('S')) - keyboard_check(ord('W'))),obj_wall)
+    {
+    //If you will not be running into a wall, then move
+    y += 3*(keyboard_check(ord('S')) - keyboard_check(ord('W')))
+    }
 </string>
           </argument>
         </arguments>
@@ -93,6 +100,31 @@ with obj_enemy
         draw_sprite_ext(spr_indicator,0,(other).x,(other).y,1,1,toenemy,c_white,1) //Draw the indicator
         }
     }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="32">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// RELEASE THE PULSE
+
+instance_create(x,y,obj_pulse)
 </string>
           </argument>
         </arguments>
