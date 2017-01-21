@@ -58,7 +58,12 @@ currentmark = noone
 
 //Check for collision where you will be moving
 
+//Temporarily set the image_angle to zero to make walking along walls more consistant
+var lastangle = image_angle
+image_angle = 0
+
 //check in x
+
 if !instance_place(x + 3*(keyboard_check(ord('D')) - keyboard_check(ord('A'))),y,obj_wall)
     {
     //If you will not be running into a wall, then move
@@ -107,6 +112,56 @@ else if (xdir == 1 &amp;&amp; ydir == -1)
     {
     image_angle = 45
     }
+else
+    {
+    image_angle = lastangle
+    }
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Camera follows player
+view_xview[0] = x-view_wview[0]/2
+view_yview[0] = y-view_hview[0]/2
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="obj_enemy">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>show_message("DEATH HAS COME")
 </string>
           </argument>
         </arguments>
@@ -140,6 +195,56 @@ with obj_enemy
         draw_sprite_ext(spr_indicator,0,(other).x,(other).y,1,1,toenemy,c_white,1) //Draw the indicator
         }
     }
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Draw wall indicator
+
+var lastangle = image_angle
+image_angle = 0
+
+//Check the right
+if place_meeting(x+4,y,obj_wall)
+    {
+    draw_sprite_ext(spr_wallindicator,0,x+33,y,1,1,0,c_white,1)
+    }
+    
+//Check the left
+if place_meeting(x-4,y,obj_wall)
+    {
+    draw_sprite_ext(spr_wallindicator,0,x-33,y,1,1,180,c_white,1)
+    }
+    
+//Check above
+if place_meeting(x,y-4,obj_wall)
+    {
+    draw_sprite_ext(spr_wallindicator,0,x,y-33,1,1,270,c_white,1)
+    }
+    
+//Check below
+if place_meeting(x,y+4,obj_wall)
+    {
+    draw_sprite_ext(spr_wallindicator,0,x,y+33,1,1,90,c_white,1)
+    }
+    
+image_angle = lastangle
 </string>
           </argument>
         </arguments>

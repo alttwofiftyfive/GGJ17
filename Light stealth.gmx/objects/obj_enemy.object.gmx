@@ -26,8 +26,15 @@
           <argument>
             <kind>1</kind>
             <string>///Initialize variables
-mypath = path_add()
+mypath = path_add()//This is for custom paths
+patrolpath = noone //This is the path for patroling, set it in the creation code
+                   //(make a path using the path editor on top, then in the room editor right click on an enemy, click creation code, and type "patrolpath = " and then whatever you named your path)
 currentmark = noone;
+lastpulse = noone;
+
+hunt = false
+
+start = false //This is to run a script on the first frame only
 </string>
           </argument>
         </arguments>
@@ -78,27 +85,86 @@ if mouse_check_button_pressed(mb_left)
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>///Start
+if start == false
+    {
+    if path_exists(patrolpath)
+        {
+        path_start(patrolpath,3,path_action_restart,true)
+        }
+    
+    start = true
+    }
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>///When hit by a pulse
 
 //Drop a marker when hit by a pulse
 if position_meeting(x,y,obj_pulse) //If pulse hits you
     {
-    if instance_exists(currentmark)
-        { //If there is a current marker, delete it
-        with currentmark
+    newpulse = collision_circle(x,y,32,obj_pulse,true,false)
+    if newpulse != lastpulse //If this is a new pulse
+        {
+        lastpulse = newpulse
+        if instance_exists(currentmark)
             {
-            instance_destroy();
+            with currentmark
+                {
+                instance_destroy();
+                }
+            }
+        currentmark = instance_create(x,y,obj_marker) //Create a marker and store its id in currentmark
+        (currentmark).papa = id
+        
+        //Move to the player's location
+        if (mp_grid_path(global.grid,mypath,x,y,(obj_playermarker).x,(obj_playermarker).y,true)) //global.grid is from player create event
+            { //Dont move if a new path was not created
+            path_start(mypath,3,path_action_stop,true)
             }
         }
-    currentmark = instance_create(x,y,obj_marker) //Create a marker and store its id in currentmark
-    (currentmark).papa = id
-    
-    //Move to the player's location
-    if (mp_grid_path(global.grid,mypath,x,y,(obj_playermarker).x,(obj_playermarker).y,true)) //global.grid is from player create event
-        { //Dont move if a new path was not created
-        path_start(mypath,3,path_action_stop,true)
-        }
     }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Dont draw yourself
+//draw_self()
 </string>
           </argument>
         </arguments>

@@ -13,9 +13,15 @@
     <sprite>sprites\spr_indicator</sprite>
     <sprite>sprites\spr_pulse</sprite>
     <sprite>sprites\spr_playermarker</sprite>
+    <sprite>sprites\spr_wallindicator</sprite>
   </sprites>
   <backgrounds name="background"/>
-  <paths name="paths"/>
+  <paths name="paths">
+    <path>paths\path1</path>
+    <path>paths\path2</path>
+    <path>paths\path3</path>
+    <path>paths\path4</path>
+  </paths>
   <objects name="objects">
     <object>objects\obj_player</object>
     <object>objects\obj_enemy</object>
