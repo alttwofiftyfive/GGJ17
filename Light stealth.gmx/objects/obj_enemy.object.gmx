@@ -78,7 +78,9 @@ if mouse_check_button_pressed(mb_left)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Drop a marker when hit by a pulse
+            <string>///When hit by a pulse
+
+//Drop a marker when hit by a pulse
 if position_meeting(x,y,obj_pulse) //If pulse hits you
     {
     if instance_exists(currentmark)
