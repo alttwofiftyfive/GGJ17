@@ -32,6 +32,7 @@ mp_grid_add_instances(global.grid,obj_wall,false) //Mark cells containg wall as 
 
 //Variables
 currentmark = noone
+pulses = 0
 
 //Music
 audio_play_sound(ms_main,0,true)
@@ -243,6 +244,7 @@ with obj_enemy
             <kind>1</kind>
             <string>///Draw wall indicator
 
+/*
 var lastangle = image_angle
 image_angle = 0
 
@@ -271,6 +273,7 @@ if place_meeting(x,y+4,obj_wall)
     }
     
 image_angle = lastangle
+*/
 </string>
           </argument>
         </arguments>
@@ -294,8 +297,9 @@ image_angle = lastangle
           <argument>
             <kind>1</kind>
             <string>/// RELEASE THE PULSE
-
+/*
 instance_create(x,y,obj_pulse)
+*/
 
 if instance_exists(currentmark)
     {
@@ -308,6 +312,15 @@ if instance_exists(currentmark)
 currentmark = instance_create(x,y,obj_playermarker);
 (currentmark).image_angle = image_angle;
 (currentmark).papa = id;
+
+pulses++;
+
+for(var i = 0;i&lt;360;i++)
+    {
+    var particle = instance_create(x,y,obj_pellet)
+    (particle).direction = i;
+    (particle).pulsenum = pulses;
+    }
 </string>
           </argument>
         </arguments>

@@ -2,7 +2,7 @@
 <object>
   <spriteName>spr_enemy</spriteName>
   <solid>0</solid>
-  <visible>-1</visible>
+  <visible>0</visible>
   <depth>1</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
@@ -99,34 +99,6 @@ if (mp_grid_path(global.grid,mypath,x,y,startx,starty,true)) //global.grid is fr
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Testing, move to location that is click
-if mouse_check_button_pressed(mb_left)
-    {
-    if (mp_grid_path(global.grid,mypath,x,y,mouse_x,mouse_y,true)) //global.grid is from player create event
-        { //Dont move if a new path was not created
-        path_start(mypath,3,path_action_stop,true)
-        }
-    }
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
             <string>///Start
 if start == false
     {
@@ -160,9 +132,9 @@ if start == false
             <string>///When hit by a pulse
 
 //Drop a marker when hit by a pulse
-if position_meeting(x,y,obj_pulse) //If pulse hits you
+if position_meeting(x,y,obj_pellet) //If pulse hits you
     {
-    newpulse = collision_circle(x,y,32,obj_pulse,true,false)
+    newpulse = (collision_circle(x,y,32,obj_pellet,true,false)).pulsenum
     if newpulse != lastpulse //If this is a new pulse
         {
         aggression += 0.15
@@ -176,7 +148,8 @@ if position_meeting(x,y,obj_pulse) //If pulse hits you
                 }
             }
         currentmark = instance_create(x,y,obj_marker) //Create a marker and store its id in currentmark
-        (currentmark).papa = id
+        (currentmark).papa = id;
+        (currentmark).image_angle = direction;
         
         //Move to the player's location
         if (mp_grid_path(global.grid,mypath,x,y,(obj_playermarker).x,(obj_playermarker).y,true)) //global.grid is from player create event
