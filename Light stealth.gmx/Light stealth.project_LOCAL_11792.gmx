@@ -64,17 +64,11 @@
     <object>objects\obj_Success</object>
   </objects>
   <rooms name="rooms">
-<<<<<<< HEAD
     <room>rooms\Opening</room>
     <room>rooms\Tutorial</room>
     <room>rooms\Game</room>
     <room>rooms\Failure</room>
     <room>rooms\Success</room>
-=======
-    <room>rooms\Newroom</room>
-    <room>rooms\test</room>
-    <room>rooms\some_title_stuff</room>
->>>>>>> origin/master
   </rooms>
   <help>
     <rtf>help.rtf</rtf>
