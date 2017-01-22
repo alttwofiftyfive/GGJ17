@@ -49,7 +49,7 @@
           <argument>
             <kind>1</kind>
             <string>///Lower transparency every frame and destroy when invisible
-image_alpha -= 0.025
+image_alpha -= 0.0125
 if image_alpha &lt;= 0
     {
     (papa).currentmark = noone
