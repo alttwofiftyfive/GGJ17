@@ -6,8 +6,15 @@
   <hsnap>64</hsnap>
   <vsnap>64</vsnap>
   <points>
-    <point>3328,1792,100</point>
-    <point>2880,1792,100</point>
-    <point>3648,1792,100</point>
+    <point>2944,1728,100</point>
+    <point>3072,1856,100</point>
+    <point>3200,1728,100</point>
+    <point>3328,1856,100</point>
+    <point>3456,1728,100</point>
+    <point>3584,1856,100</point>
+    <point>3456,1728,100</point>
+    <point>3328,1856,100</point>
+    <point>3200,1728,100</point>
+    <point>3072,1856,100</point>
   </points>
 </path>

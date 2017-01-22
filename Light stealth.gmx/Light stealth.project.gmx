@@ -40,6 +40,7 @@
     <path>paths\sentry13</path>
     <path>paths\sentry14</path>
     <path>paths\sentry15</path>
+    <path>paths\sentry16</path>
   </paths>
   <objects name="objects">
     <object>objects\obj_player</object>
