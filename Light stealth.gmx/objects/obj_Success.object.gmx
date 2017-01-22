@@ -25,8 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>audio_stop_sound(ms_main)
-room_goto(room_first)
+            <string>room_goto(room_previous(room))
 
 </string>
           </argument>

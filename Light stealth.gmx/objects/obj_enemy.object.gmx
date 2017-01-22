@@ -134,6 +134,7 @@ if start == false
 //Drop a marker when hit by a pulse
 if position_meeting(x,y,obj_pellet) //If pulse hits you
     {
+    audio_play_sound(Blip_sound,2,false)
     newpulse = collision_circle(x,y,32,obj_pellet,true,false)
     if (newpulse).pulsenum != lastpulse //If this is a new pulse
         {

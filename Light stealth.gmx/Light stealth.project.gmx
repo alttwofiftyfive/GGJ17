@@ -8,6 +8,7 @@
     <sound>sound\ms_main</sound>
     <sound>sound\pulse_sound</sound>
     <sound>sound\ms_title</sound>
+    <sound>sound\Blip_sound</sound>
   </sounds>
   <sprites name="sprites">
     <sprite>sprites\spr_square</sprite>
@@ -24,6 +25,9 @@
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
+    <background>background\Title</background>
+    <background>background\Instructions</background>
+    <background>background\Win</background>
   </backgrounds>
   <paths name="paths">
     <path>paths\path1</path>
@@ -62,12 +66,14 @@
     <object>objects\obj_tut</object>
     <object>objects\obj_failure</object>
     <object>objects\obj_Success</object>
+    <object>objects\obj_credits</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\Opening</room>
     <room>rooms\Tutorial</room>
     <room>rooms\Game</room>
     <room>rooms\Failure</room>
+    <room>rooms\Credits</room>
     <room>rooms\Success</room>
   </rooms>
   <help>
