@@ -58,6 +58,7 @@
   <rooms name="rooms">
     <room>rooms\Newroom</room>
     <room>rooms\test</room>
+    <room>rooms\title</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>
