@@ -234,6 +234,29 @@ view_yview[0] = y-view_hview[0]/2
         </arguments>
       </action>
     </event>
+    <event eventtype="4" ename="obj_end">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>room_goto(room_last)
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="4" ename="obj_enemy">
       <action>
         <libid>1</libid>
@@ -251,8 +274,7 @@ view_yview[0] = y-view_hview[0]/2
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>show_message("DEATH HAS COME")
-room_restart()
+            <string>room_goto(room_next(room))
 </string>
           </argument>
         </arguments>
@@ -284,11 +306,11 @@ if keyboard_check(vk_shift)
     
     with obj_wall
         {
-        draw_sprite_ext(spr_wall,0,(other).windoww + (x-(other).mapx)*(other).scale,128*(other).scale + (y-(other).maptop)*(other).scale,image_xscale*(other).scale,image_yscale*(other).scale,0,c_white,0.2)
+        draw_sprite_ext(spr_wall,0,(other).windoww-20 + (x-(other).mapx)*(other).scale,128*(other).scale + (y-(other).maptop)*(other).scale,image_xscale*(other).scale,image_yscale*(other).scale,0,c_white,0.2)
         }
     with obj_end
         {
-        draw_sprite_ext(spr_checkpoint,0,(other).windoww + (x-(other).mapx)*(other).scale,128*(other).scale + (y-(other).maptop)*(other).scale,image_xscale*(other).scale,image_yscale*(other).scale,0,c_yellow,0.3)
+        draw_sprite_ext(spr_checkpoint,0,(other).windoww-20 + (x-64-(other).mapx)*(other).scale,128*(other).scale + (y-64-(other).maptop)*(other).scale,image_xscale*(other).scale,image_yscale*(other).scale,0,c_yellow,0.3)
         }
     }
 </string>
