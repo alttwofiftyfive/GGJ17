@@ -216,7 +216,7 @@ draw_self()
 
 with obj_enemy
     {
-    if (distance_to_object(obj_player) &lt; 64) //For every enemy that is close
+    if (distance_to_object(obj_player) &lt; 180) //For every enemy that is close
         {
         var toenemy = point_direction((other).x,(other).y,x,y) //Angle from the player to the enemy
         draw_sprite_ext(spr_indicator,0,(other).x,(other).y,1,1,toenemy,c_white,1) //Draw the indicator
@@ -300,6 +300,7 @@ image_angle = lastangle
 /*
 instance_create(x,y,obj_pulse)
 */
+audio_play_sound(pulse_sound,2,false)
 
 if instance_exists(currentmark)
     {
