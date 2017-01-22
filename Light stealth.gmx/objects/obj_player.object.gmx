@@ -244,7 +244,7 @@ with obj_enemy
             <kind>1</kind>
             <string>///Draw wall indicator
 
-/*
+///*
 var lastangle = image_angle
 image_angle = 0
 
@@ -273,7 +273,7 @@ if place_meeting(x,y+4,obj_wall)
     }
     
 image_angle = lastangle
-*/
+//*/
 </string>
           </argument>
         </arguments>
