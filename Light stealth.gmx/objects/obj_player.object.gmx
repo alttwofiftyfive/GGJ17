@@ -288,7 +288,7 @@ if keyboard_check(vk_shift)
         }
     with obj_end
         {
-        draw_sprite_ext(spr_checkpoint,0,(other).windoww + (x-(other).mapx)*(other).scale,128*(other).scale + (y-(other).maptop)*(other).scale,image_xscale*(other).scale,image_yscale*(other).scale,0,c_lime,0.3)
+        draw_sprite_ext(spr_checkpoint,0,(other).windoww + (x-(other).mapx)*(other).scale,128*(other).scale + (y-(other).maptop)*(other).scale,image_xscale*(other).scale,image_yscale*(other).scale,0,c_yellow,0.3)
         }
     }
 </string>
