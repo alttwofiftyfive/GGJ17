@@ -33,7 +33,8 @@
     <object>objects\obj_playermarker</object>
   </objects>
   <rooms name="rooms">
-    <room>rooms\room0</room>
+    <room>rooms\Newroom</room>
+    <room>rooms\test</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>
