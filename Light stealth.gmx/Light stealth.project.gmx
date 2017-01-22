@@ -23,6 +23,21 @@
     <path>paths\path2</path>
     <path>paths\path3</path>
     <path>paths\path4</path>
+    <path>paths\sentry1</path>
+    <path>paths\sentry2</path>
+    <path>paths\sentry3</path>
+    <path>paths\sentry4</path>
+    <path>paths\sentry5</path>
+    <path>paths\sentry6</path>
+    <path>paths\sentry7</path>
+    <path>paths\sentry8</path>
+    <path>paths\sentry9</path>
+    <path>paths\sentry10</path>
+    <path>paths\sentry11</path>
+    <path>paths\sentry12</path>
+    <path>paths\sentry13</path>
+    <path>paths\sentry14</path>
+    <path>paths\sentry15</path>
   </paths>
   <objects name="objects">
     <object>objects\obj_player</object>
