@@ -2,7 +2,7 @@
 <object>
   <spriteName>spr_enemy</spriteName>
   <solid>0</solid>
-  <visible>0</visible>
+  <visible>-1</visible>
   <depth>1</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
@@ -134,12 +134,12 @@ if start == false
 //Drop a marker when hit by a pulse
 if position_meeting(x,y,obj_pellet) //If pulse hits you
     {
-    newpulse = (collision_circle(x,y,32,obj_pellet,true,false)).pulsenum
-    if newpulse != lastpulse //If this is a new pulse
+    newpulse = collision_circle(x,y,32,obj_pellet,true,false)
+    if (newpulse).pulsenum != lastpulse //If this is a new pulse
         {
         aggression += 0.15
         
-        lastpulse = newpulse
+        lastpulse = (newpulse).pulsenum
         if instance_exists(currentmark)
             {
             with currentmark
@@ -152,7 +152,8 @@ if position_meeting(x,y,obj_pellet) //If pulse hits you
         (currentmark).image_angle = direction;
         
         //Move to the player's location
-        if (mp_grid_path(global.grid,mypath,x,y,(obj_playermarker).x,(obj_playermarker).y,true)) //global.grid is from player create event
+        path_end()
+        if (mp_grid_path(global.grid,mypath,x,y,(newpulse).pulsex,(newpulse).pulsey,true)) //global.grid is from player create event
             { //Dont move if a new path was not created
             path_start(mypath,movespeed*aggression,path_action_stop,true)
             hunt = 1
@@ -202,12 +203,14 @@ else if hunt == 2
             }
         
         //Pick a random location within a range to move to
+        var i = 0
         do 
             {
-            var randx = x + irandom_range(-250,250)
-            var randy = y + irandom_range(-250,250)
+            var randx = x + irandom_range(-250,250);
+            var randy = y + irandom_range(-250,250);
+            i++
             }
-        until(xleft &lt; randx &amp;&amp; randx &lt; xright &amp;&amp; ytop &lt; randy &amp;&amp; randy &lt; ybottom)
+        until((xleft &lt; randx &amp;&amp; randx &lt; xright &amp;&amp; ytop &lt; randy &amp;&amp; randy &lt; ybottom) || i&gt;100)
         
         if (mp_grid_path(global.grid,mypath,x,y,randx,randy,true)) //global.grid is from player create event
             { //Dont move if a new path was not created 

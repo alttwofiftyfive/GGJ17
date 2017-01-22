@@ -29,6 +29,8 @@
 fade = true
 
 pulsenum = 0
+pulsex = x
+pulsey = y
 </string>
           </argument>
         </arguments>

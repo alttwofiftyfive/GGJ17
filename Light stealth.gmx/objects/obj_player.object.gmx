@@ -35,7 +35,10 @@ currentmark = noone
 pulses = 0
 
 //Music
-audio_play_sound(ms_main,0,true)
+if !audio_is_playing(ms_main)
+    {
+    audio_play_sound(ms_main,0,true)
+    }
 </string>
           </argument>
         </arguments>
@@ -187,8 +190,8 @@ view_yview[0] = y-view_hview[0]/2
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//show_message("DEATH HAS COME")
-show_message("You done been killed")
+            <string>show_message("DEATH HAS COME")
+room_restart()
 </string>
           </argument>
         </arguments>
