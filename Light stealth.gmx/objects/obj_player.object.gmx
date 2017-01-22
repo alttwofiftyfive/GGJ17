@@ -25,7 +25,9 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Set up grid
+            <string>///Set up global and local variables
+
+//Set up grid
 global.grid = mp_grid_create(0,0,room_width/64,room_height/64,64,64) //Create grid for pathfinding
 
 mp_grid_add_instances(global.grid,obj_wall,false) //Mark cells containg wall as impassible
@@ -39,6 +41,65 @@ if !audio_is_playing(ms_main)
     {
     audio_play_sound(ms_main,0,true)
     }
+    
+//Map
+mapx = 0
+mapy = 0
+
+maptop = 0
+mapbottom = 0
+mapleft = 0
+mapright = 0
+
+windoww = 0
+windowh = 0
+scale = 0
+
+with obj_wall
+    {
+    (other).mapx += x/instance_count;
+    (other).mapy += y/instance_count;
+    
+    if x &gt; (other).mapright
+        {
+        (other).mapright = x
+        }
+    if x &lt; (other).mapleft
+        {
+        (other).mapleft = x
+        }
+    if y &gt; (other).mapbottom
+        {
+        (other).mapbottom = y
+        }
+    if y &lt; (other).maptop
+        {
+        (other).maptop = y
+        }
+    }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Pulse cooldown
 </string>
           </argument>
         </arguments>
@@ -197,6 +258,44 @@ room_restart()
         </arguments>
       </action>
     </event>
+    <event eventtype="8" enumb="64">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Draw a map
+if keyboard_check(vk_shift)
+    {
+    windoww = window_get_width()/2
+    windowh = window_get_height()/2
+    scale = min(window_get_height()/(mapbottom-maptop+256),window_get_width()/(mapright-mapleft))
+    
+    with obj_wall
+        {
+        draw_sprite_ext(spr_wall,0,(other).windoww + (x-(other).mapx)*(other).scale,128*(other).scale + (y-(other).maptop)*(other).scale,image_xscale*(other).scale,image_yscale*(other).scale,0,c_white,0.2)
+        }
+    with obj_end
+        {
+        draw_sprite_ext(spr_checkpoint,0,(other).windoww + (x-(other).mapx)*(other).scale,128*(other).scale + (y-(other).maptop)*(other).scale,image_xscale*(other).scale,image_yscale*(other).scale,0,c_lime,0.3)
+        }
+    }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
@@ -303,27 +402,33 @@ image_angle = lastangle
 /*
 instance_create(x,y,obj_pulse)
 */
-audio_play_sound(pulse_sound,2,false)
 
-if instance_exists(currentmark)
+if alarm[1] = -1
     {
-    with currentmark
+    alarm[1] = 30
+    
+    audio_play_sound(pulse_sound,2,false)
+    
+    if instance_exists(currentmark)
         {
-        instance_destroy()
+        with currentmark
+            {
+            instance_destroy()
+            }
         }
-    }
-
-currentmark = instance_create(x,y,obj_playermarker);
-(currentmark).image_angle = image_angle;
-(currentmark).papa = id;
-
-pulses++;
-
-for(var i = 0;i&lt;360;i++)
-    {
-    var particle = instance_create(x,y,obj_pellet)
-    (particle).direction = i;
-    (particle).pulsenum = pulses;
+    
+    currentmark = instance_create(x,y,obj_playermarker);
+    (currentmark).image_angle = image_angle;
+    (currentmark).papa = id;
+    
+    pulses++;
+    
+    for(var i = 0;i&lt;360;i++)
+        {
+        var particle = instance_create(x,y,obj_pellet)
+        (particle).direction = i;
+        (particle).pulsenum = pulses;
+        }
     }
 </string>
           </argument>
