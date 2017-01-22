@@ -6,9 +6,9 @@
   <hsnap>64</hsnap>
   <vsnap>64</vsnap>
   <points>
-    <point>1856,1728,100</point>
-    <point>2176,1728,100</point>
-    <point>2176,1536,100</point>
-    <point>1856,1536,100</point>
+    <point>1984,1856,100</point>
+    <point>2240,1856,100</point>
+    <point>2240,2048,100</point>
+    <point>1984,2048,100</point>
   </points>
 </path>
