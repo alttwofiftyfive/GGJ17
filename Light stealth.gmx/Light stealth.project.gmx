@@ -28,6 +28,8 @@
     <background>background\Title</background>
     <background>background\Instructions</background>
     <background>background\Win</background>
+    <background>background\Fail</background>
+    <background>background\Credits_back</background>
   </backgrounds>
   <paths name="paths">
     <path>paths\path1</path>
